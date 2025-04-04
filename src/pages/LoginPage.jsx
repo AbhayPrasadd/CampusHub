@@ -25,9 +25,7 @@ const LoginPage = () => {
       const storedRole = userDoc.exists() ? userDoc.data().role : null;
 
       if (storedRole && storedRole === role) {
-        if (role === "admin") navigate("/admin/dashboard");
-        else if (role === "faculty") navigate("/faculty/dashboard");
-        else navigate("/student/dashboard");
+        navigate("/dashboard");
       } else {
         setError("Invalid role selected or user not registered correctly.");
       }
@@ -47,10 +45,7 @@ const LoginPage = () => {
         createdAt: new Date()
       });
 
-      // Navigate after signup
-      if (role === "admin") navigate("/admin/dashboard");
-      else if (role === "faculty") navigate("/faculty/dashboard");
-      else navigate("/student/dashboard");
+      navigate("/dashboard");
     } catch (err) {
       setError(err.message);
     }
