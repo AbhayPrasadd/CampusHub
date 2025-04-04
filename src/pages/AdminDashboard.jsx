@@ -22,6 +22,16 @@ const adminCardData = [
     value: "10 Courses",
     path: "/admin/course-management",
   },
+  {
+    title: "Course Management",
+    value: "10 Courses",
+    path: "/admin/course-management",
+  },
+  {
+    title: "Course Management",
+    value: "10 Courses",
+    path: "/admin/course-management",
+  },
   
 ];
 

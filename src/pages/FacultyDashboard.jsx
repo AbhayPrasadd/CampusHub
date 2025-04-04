@@ -28,9 +28,9 @@ const facultyCardData = [
     path: "/faculty/student-tracking",
   },
   {
-    title: "Paisa Management",
-    value: "80 Students",
-    path: "/faculty/student-tracking",
+    title: "Annoucement List",
+    value: "by Admin",
+    path: "/faculty/announcementlist",
   },
 ];
 

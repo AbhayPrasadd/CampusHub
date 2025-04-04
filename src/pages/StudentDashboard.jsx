@@ -27,6 +27,11 @@ const cardData = [
     value: "A- Average",
     path: "/student/grades",
   },
+  {
+    title: "Announcements",
+    value: "From Admin",
+    path: "/student/announcementlist",
+  },
 ];
 
 function StudentDashboard() {
