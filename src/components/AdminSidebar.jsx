@@ -1,29 +1,48 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Users,
+  FileText,
+  Megaphone,
+  BookOpen,
+} from "lucide-react";
 
-const AdminSidebar = () => {
-  return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Admin Menu</h2>
-      <ul className="space-y-2">
-        <li>
-          <NavLink to="/dashboard" className="hover:underline">Dashboard</NavLink>
-        </li>
-        <li>
-          <NavLink to="/admin/user-management" className="hover:underline">User Management</NavLink>
-        </li>
-        <li>
-          <NavLink to="/admin/report-generation" className="hover:underline">Report Generation</NavLink>
-        </li>
-        <li>
-          <NavLink to="/admin/announcements" className="hover:underline">Announcements</NavLink>
-        </li>
-        <li>
-          <NavLink to="/admin/course-management" className="hover:underline">Course Management</NavLink>
-        </li>
-      </ul>
-    </div>
-  );
-};
+const AdminSidebar = () => (
+  <div className="p-4">
+    <h2 className="text-2xl font-bold mb-22 text-white"></h2>
+    <ul>
+      <li className="mb-6">
+        <Link to="/dashboard" className="flex items-center space-x-3 text-white text-xl hover:text-blue-900">
+          <LayoutDashboard className="w-6 h-6" />
+          <span className="text-justify">Dashboard</span>
+        </Link>
+      </li>
+      <li className="mb-6">
+        <Link to="/admin/user-management" className="flex items-center space-x-3 text-white text-xl hover:text-blue-900">
+          <Users className="w-6 h-6" />
+          <span className="text-justify">User Management</span>
+        </Link>
+      </li>
+      <li className="mb-6">
+        <Link to="/admin/report-generation" className="flex items-center space-x-3 text-white text-xl hover:text-blue-900">
+          <FileText className="w-6 h-6" />
+          <span className="text-justify">Report Generation</span>
+        </Link>
+      </li>
+      <li className="mb-6">
+        <Link to="/admin/announcements" className="flex items-center space-x-3 text-white text-xl hover:text-blue-900">
+          <Megaphone className="w-6 h-6" />
+          <span className="text-justify">Announcements</span>
+        </Link>
+      </li>
+      <li className="mb-6">
+        <Link to="/admin/course-management" className="flex items-center space-x-3 text-white text-xl hover:text-blue-900">
+          <BookOpen className="w-6 h-6" />
+          <span className="text-justify">Course Management</span>
+        </Link>
+      </li>
+    </ul>
+  </div>
+);
 
 export default AdminSidebar;

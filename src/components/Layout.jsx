@@ -35,12 +35,12 @@ const Layout = ({ role, children }) => {
 
   return (
     <div className="flex min-h-screen">
-      <div className="w-64 bg-gray-800 text-white">
+      <div className="w-68 bg-gray-800 text-white">
         {renderSidebar()}
       </div>
       <div className="flex-1">
         {renderNavbar()}
-        <div className="p-6">{children}</div>
+        <div className="p-2">{children}</div>
       </div>
     </div>
   );
