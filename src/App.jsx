@@ -22,7 +22,7 @@ import AnnouncementList from "./pages/students/AnnouncementList";
 //faculty features pages
 import CourseCreation from "./pages/faculty/CourseCreation";
 import AssignmentManagement from "./pages/faculty/AssignmentManagement";
-import QuizManagement from "./pages/faculty/QuizManagement";
+import QuizCreator from "./pages/faculty/QuizCreator";
 import StudentTracking from "./pages/faculty/StudentTracking";
 
 //Admin feature pages
@@ -110,7 +110,7 @@ const App = () => {
   <>
     <Route path="/faculty/course-creation" element={<Layout role="faculty"><CourseCreation /></Layout>} />
     <Route path="/faculty/assignment-management" element={<Layout role="faculty"><AssignmentManagement /></Layout>} />
-    <Route path="/faculty/quiz-management" element={<Layout role="faculty"><QuizManagement /></Layout>} />
+    <Route path="/faculty/quizCreator" element={<Layout role="faculty"><QuizCreator /></Layout>} />
     <Route path="/faculty/student-tracking" element={<Layout role="faculty"><StudentTracking /></Layout>} />
     <Route path="/faculty/announcementlist" element={<Layout role="faculty"><AnnouncementList /></Layout>} />
   </>

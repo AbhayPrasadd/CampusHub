@@ -40,7 +40,7 @@ const FacultySidebar = () => (
       </li>
       <li className="mb-6">
         <Link
-          to="/faculty/quiz-management"
+          to="/faculty/quizCreator"
           className="flex items-center space-x-3 text-white text-xl hover:text-blue-900"
         >
           <Pencil className="w-6 h-6" />

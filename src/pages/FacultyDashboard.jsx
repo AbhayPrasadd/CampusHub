@@ -14,8 +14,8 @@ const facultyCardData = [
   },
   {
     title: "Quiz Management",
-    value: "3 Quizzes",
-    path: "/faculty/quiz-management",
+    value: "Create Quizes",
+    path: "/faculty/quizCreator",
   },
   {
     title: "Student Tracking",
