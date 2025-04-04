@@ -18,6 +18,7 @@ import Assignments from "./pages/students/Assignments";
 import Quizzes from "./pages/students/Quizzes";
 import Grades from "./pages/students/Grades";
 import AnnouncementList from "./pages/students/AnnouncementList";
+import CourseEnroll from "./pages/students/CourseEnroll";
 
 //faculty features pages
 import CourseCreation from "./pages/faculty/CourseCreation";
@@ -86,11 +87,13 @@ const App = () => {
       {/* Student Role Specific Pages */}
       {role === "student" && (
         <>
-          <Route path="/student/courseRecommender" element={<Layout role="student"><CourseRecommender /></Layout>} />
+         
+          <Route path="/student/courseenroll" element={<Layout role="student"><AnnouncementList /></Layout>} />
           <Route path="/student/lectures" element={<Layout role="student"><Lectures /></Layout>} />
           <Route path="/student/assignments" element={<Layout role="student"><Assignments /></Layout>} />
           <Route path="/student/quizzes" element={<Layout role="student"><Quizzes /></Layout>} />
           <Route path="/student/grades" element={<Layout role="student"><Grades /></Layout>} />
+          <Route path="/student/courseRecommender" element={<Layout role="student"><CourseRecommender /></Layout>} />
           <Route path="/student/announcementlist" element={<Layout role="student"><AnnouncementList /></Layout>} />
         </>
       )}

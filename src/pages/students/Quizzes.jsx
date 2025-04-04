@@ -82,7 +82,7 @@ const Quizzes = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto bg-white shadow-lg rounded-xl mt-8">
+    <div className="p-6 max-w-xl mx-auto bg-white shadow-lg rounded-xl mt-8">
       {!selectedQuiz ? (
         <>
           <h2 className="text-2xl font-bold mb-6 text-center">Available Quizzes</h2>
