@@ -4,7 +4,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const QuizCreator = () => {
   const [title, setTitle] = useState("");
-  const [courseId, setCourseId] = useState(""); // Replace with your course linking logic
+  const [courseId, setCourseId] = useState("");
   const [questionText, setQuestionText] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(null);
@@ -36,7 +36,7 @@ const QuizCreator = () => {
       await addDoc(collection(db, "quizzes"), {
         title,
         courseId,
-        createdBy: "faculty_uid_placeholder", // Replace with current logged-in faculty ID
+        createdBy: "faculty_uid_placeholder",
         createdAt: serverTimestamp(),
         questions
       });
@@ -51,32 +51,36 @@ const QuizCreator = () => {
   };
 
   return (
-    <div className="p-4 max-w-2xl mx-auto">
-      <h2 className="text-xl font-bold mb-4">Create Quiz</h2>
+    <div className="max-w-8xl mx-auto bg-white shadow-md rounded-xl p-8 my-10">
+      <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">Create a New Quiz</h2>
 
-      <input
-        type="text"
-        placeholder="Quiz Title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-        className="border p-2 w-full mb-2"
-      />
+      {/* Quiz Info */}
+      <div className="space-y-4 mb-6">
+        <input
+          type="text"
+          placeholder="Quiz Title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          type="text"
+          placeholder="Course ID"
+          value={courseId}
+          onChange={e => setCourseId(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
 
-      <input
-        type="text"
-        placeholder="Course ID"
-        value={courseId}
-        onChange={e => setCourseId(e.target.value)}
-        className="border p-2 w-full mb-4"
-      />
-
-      <div className="mb-4">
+      {/* Question Form */}
+      <div className="bg-gray-50 p-6 rounded-md shadow-inner mb-6">
+        <h3 className="text-xl font-semibold mb-4 text-gray-700">Add Question</h3>
         <input
           type="text"
           placeholder="Enter Question"
           value={questionText}
           onChange={e => setQuestionText(e.target.value)}
-          className="border p-2 w-full mb-2"
+          className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
         {options.map((opt, index) => (
@@ -90,14 +94,14 @@ const QuizCreator = () => {
               newOptions[index] = e.target.value;
               setOptions(newOptions);
             }}
-            className="border p-2 w-full mb-1"
+            className="w-full p-3 mb-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         ))}
 
         <select
           value={correctAnswerIndex !== null ? correctAnswerIndex : ""}
           onChange={e => setCorrectAnswerIndex(parseInt(e.target.value))}
-          className="border p-2 w-full mt-2"
+          className="w-full p-3 mt-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="" disabled>Select Correct Answer</option>
           {options.map((_, index) => (
@@ -107,24 +111,30 @@ const QuizCreator = () => {
 
         <button
           onClick={handleAddQuestion}
-          className="mt-2 bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md transition duration-200 mx-auto block"
         >
           Add Question
         </button>
       </div>
 
-      <div className="mb-4">
-        <h3 className="font-semibold">Questions Preview:</h3>
-        <ul className="list-disc ml-5">
-          {questions.map((q, idx) => (
-            <li key={idx}>{q.question}</li>
-          ))}
-        </ul>
+      {/* Preview Section */}
+      <div className="mb-6">
+        <h3 className="text-lg font-medium mb-2 text-gray-800">Questions Preview</h3>
+        {questions.length > 0 ? (
+          <ul className="list-disc ml-5 space-y-1 text-gray-700">
+            {questions.map((q, idx) => (
+              <li key={idx}>{q.question}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-500">No questions added yet.</p>
+        )}
       </div>
 
+      {/* Submit Quiz */}
       <button
         onClick={handleSaveQuiz}
-        className="bg-green-600 text-white px-4 py-2 rounded"
+        className="bg-green-600 hover:bg-green-700 text-white py-3 px-8 rounded-md font-semibold text-lg transition duration-200 mx-auto block"
       >
         Save Quiz
       </button>

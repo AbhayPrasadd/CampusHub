@@ -35,7 +35,7 @@ const Layout = ({ role, children }) => {
 
   return (
     <div className="flex min-h-screen">
-      <div className="w-68 bg-gray-800 text-white">
+      <div className="w-70 bg-gray-800 text-white">
         {renderSidebar()}
       </div>
       <div className="flex-1">
