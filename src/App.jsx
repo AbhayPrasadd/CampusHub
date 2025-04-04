@@ -12,23 +12,23 @@ import Layout from "./components/Layout";
 import { auth, db } from "./firebase";
 
 // Student feature pages
-import Courses from "./pages/Courses";
-import Lectures from "./pages/Lectures";
-import Assignments from "./pages/Assignments";
-import Quizzes from "./pages/Quizzes";
-import Grades from "./pages/Grades";
+import Courses from "./pages/students/Courses";
+import Lectures from "./pages/students/Lectures";
+import Assignments from "./pages/students/Assignments";
+import Quizzes from "./pages/students/Quizzes";
+import Grades from "./pages/students/Grades";
 
 //faculty features pages
-import CourseCreation from "./pages/CourseCreation";
-import AssignmentManagement from "./pages/AssignmentManagement";
-import QuizManagement from "./pages/QuizManagement";
-import StudentTracking from "./pages/StudentTracking";
+import CourseCreation from "./pages/faculty/CourseCreation";
+import AssignmentManagement from "./pages/faculty/AssignmentManagement";
+import QuizManagement from "./pages/faculty/QuizManagement";
+import StudentTracking from "./pages/faculty/StudentTracking";
 
 //Admin feature pages
-import UserManagement from "./pages/UserManagement";
-import ReportGeneration from "./pages/ReportGeneration";
-import Announcements from "./pages/Announcements";
-import CourseManagement from "./pages/CourseCreation";
+import UserManagement from "./pages/admin/UserManagement";
+import ReportGeneration from "./pages/admin/ReportGeneration";
+import Announcements from "./pages/admin/Announcements";
+import CourseManagement from "./pages/faculty/CourseCreation";
 
 const App = () => {
   const [user, setUser] = useState(null);
