@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { collection, getDocs, doc, setDoc, serverTimestamp } from "firebase/firestore";
-import { auth } from "../../firebase";
+import { auth } from "../../firebase/";
 
 const StudentTracking = () => {
   const [quizzes, setQuizzes] = useState([]);
@@ -53,70 +53,79 @@ const StudentTracking = () => {
   };
 
   return (
-    <div className="p-4 max-w-3xl mx-auto">
+    <div className="p-6 max-w-4xl mx-auto bg-white shadow-lg rounded-xl mt-8">
       {!selectedQuiz ? (
         <>
-          <h2 className="text-xl font-bold mb-4">Available Quizzes</h2>
-          <ul>
+          <h2 className="text-2xl font-bold mb-6 text-center">Available Quizzes</h2>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {quizzes.map((quiz) => (
               <li
                 key={quiz.id}
-                className="mb-2 p-3 border rounded cursor-pointer hover:bg-gray-100"
+                className="p-4 border rounded-xl cursor-pointer hover:bg-blue-50 hover:border-blue-400 transition"
                 onClick={() => handleSelectQuiz(quiz)}
               >
-                {quiz.title}
+                <h3 className="text-lg font-semibold text-blue-600">{quiz.title}</h3>
               </li>
             ))}
           </ul>
         </>
       ) : (
         <div>
-          <h2 className="text-xl font-bold mb-4">{selectedQuiz.title}</h2>
-          {selectedQuiz.questions.map((q, qIndex) => (
-            <div key={qIndex} className="mb-4">
-              <p className="font-medium mb-2">{qIndex + 1}. {q.question}</p>
-              {q.options.map((opt, optIndex) => {
-                const isCorrect = submitted && optIndex === q.correctAnswerIndex;
-                const isWrong = submitted && answers[qIndex] === optIndex && optIndex !== q.correctAnswerIndex;
-                return (
-                  <div key={optIndex}>
-                    <label className={`inline-flex items-center ${isCorrect ? 'text-green-600 font-semibold' : ''} ${isWrong ? 'text-red-600 line-through' : ''}`}>
-                      <input
-                        type="radio"
-                        name={`question-${qIndex}`}
-                        checked={answers[qIndex] === optIndex}
-                        onChange={() => handleChangeAnswer(qIndex, optIndex)}
-                        className="mr-2"
-                        disabled={submitted}
-                      />
-                      {opt}
-                    </label>
-                  </div>
-                );
-              })}
-              {submitted && (
-                <p className="text-sm text-gray-600 mt-1">✅ Correct Answer: {q.options[q.correctAnswerIndex]}</p>
-              )}
-            </div>
-          ))}
+          <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">{selectedQuiz.title}</h2>
+          <div className="space-y-6">
+            {selectedQuiz.questions.map((q, qIndex) => (
+              <div key={qIndex} className="bg-gray-50 p-4 rounded-xl shadow-sm">
+                <p className="font-medium mb-4 text-lg">{qIndex + 1}. {q.question}</p>
+                <div className="space-y-2">
+                  {q.options.map((opt, optIndex) => {
+                    const isCorrect = submitted && optIndex === q.correctAnswerIndex;
+                    const isWrong = submitted && answers[qIndex] === optIndex && optIndex !== q.correctAnswerIndex;
+                    return (
+                      <div key={optIndex}>
+                        <label className={`inline-flex items-center px-3 py-2 w-full rounded-lg border cursor-pointer transition
+                          ${isCorrect ? 'bg-green-100 border-green-500 text-green-700 font-semibold' : ''}
+                          ${isWrong ? 'bg-red-100 border-red-500 text-red-700 line-through' : 'border-gray-300 hover:border-blue-300 hover:bg-blue-50'}`}
+                        >
+                          <input
+                            type="radio"
+                            name={`question-${qIndex}`}
+                            checked={answers[qIndex] === optIndex}
+                            onChange={() => handleChangeAnswer(qIndex, optIndex)}
+                            className="mr-3"
+                            disabled={submitted}
+                          />
+                          {opt}
+                        </label>
+                      </div>
+                    );
+                  })}
+                </div>
+                {submitted && (
+                  <p className="mt-2 text-sm text-gray-600">✅ Correct Answer: <span className="font-semibold">{q.options[q.correctAnswerIndex]}</span></p>
+                )}
+              </div>
+            ))}
+          </div>
 
           {!submitted ? (
-            <button
-              onClick={handleSubmit}
-              className="bg-blue-600 text-white px-4 py-2 rounded"
-            >
-              Submit Quiz
-            </button>
+            <div className="text-center mt-6">
+              <button
+                onClick={handleSubmit}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-xl text-lg shadow-md"
+              >
+                Submit Quiz
+              </button>
+            </div>
           ) : (
-            <div className="mt-4">
-              <p className="font-semibold text-green-600">
-                ✅ Quiz Submitted! You scored {score} out of {selectedQuiz.questions.length}
+            <div className="mt-6 text-center">
+              <p className="text-green-700 text-lg font-semibold">
+                🎉 Quiz Submitted! You scored {score} out of {selectedQuiz.questions.length}
               </p>
               <button
                 onClick={() => setSelectedQuiz(null)}
-                className="mt-2 text-blue-500 underline"
+                className="mt-4 text-blue-500 underline hover:text-blue-700"
               >
-                Back to Quizzes
+                ← Back to Quiz List
               </button>
             </div>
           )}
