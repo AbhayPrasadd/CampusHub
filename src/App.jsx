@@ -89,7 +89,7 @@ const App = () => {
       {role === "student" && (
         <>
          
-          <Route path="/student/courseenroll" element={<Layout role="student"><AnnouncementList /></Layout>} />
+          <Route path="/student/courseenroll" element={<Layout role="student"><CourseEnroll /></Layout>} />
           <Route path="/student/lectures" element={<Layout role="student"><Lectures /></Layout>} />
           <Route path="/student/assignments" element={<Layout role="student"><Assignments /></Layout>} />
           <Route path="/student/quizzes" element={<Layout role="student"><Quizzes /></Layout>} />
