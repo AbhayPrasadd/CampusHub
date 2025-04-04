@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Bell, ChevronDown, UserCircle } from "lucide-react";
 
-const AdminNavbar = ({ onNotificationsClick }) => {
+const FacultyNavbar = ({ onNotificationsClick }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const AdminNavbar = ({ onNotificationsClick }) => {
 
   return (
     <div className="bg-gray-800 text-white px-6 py-3 flex justify-between items-center shadow">
-      <div className="text-xl font-semibold">Admin Dashboard</div>
+      <div className="text-xl font-semibold">Faculty Dashboard</div>
 
       <div className="flex items-center space-x-4 gap-5 relative">
         {/* Notification Bell */}
@@ -70,4 +70,4 @@ const AdminNavbar = ({ onNotificationsClick }) => {
   );
 };
 
-export default AdminNavbar;
+export default FacultyNavbar;

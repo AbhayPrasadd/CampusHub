@@ -12,7 +12,7 @@ import Layout from "./components/Layout";
 import { auth, db } from "./firebase";
 
 // Student feature pages
-import Courses from "./pages/students/Courses";
+import CourseRecommender from "./pages/students/CourseRecommender";
 import Lectures from "./pages/students/Lectures";
 import Assignments from "./pages/students/Assignments";
 import Quizzes from "./pages/students/Quizzes";
@@ -86,7 +86,7 @@ const App = () => {
       {/* Student Role Specific Pages */}
       {role === "student" && (
         <>
-          <Route path="/student/courses" element={<Layout role="student"><Courses /></Layout>} />
+          <Route path="/student/courseRecommender" element={<Layout role="student"><CourseRecommender /></Layout>} />
           <Route path="/student/lectures" element={<Layout role="student"><Lectures /></Layout>} />
           <Route path="/student/assignments" element={<Layout role="student"><Assignments /></Layout>} />
           <Route path="/student/quizzes" element={<Layout role="student"><Quizzes /></Layout>} />

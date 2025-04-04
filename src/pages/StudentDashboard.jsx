@@ -18,9 +18,9 @@ const cardData = [
     path: "/student/assignments",
   },
   {
-    title: "Quizzes & Exams",
+    title: "Course Recomendation",
     value: "2 Upcoming",
-    path: "/student/quizzes",
+    path: "/student/courseRecommender",
   },
   {
     title: "Grades & Feedback",
