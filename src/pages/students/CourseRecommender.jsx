@@ -1,92 +1,127 @@
 import React, { useState } from "react";
+import axios from "axios";
 
-function CourseRecommender() {
-  const [interests, setInterests] = useState("");
-  const [pastCourses, setPastCourses] = useState("");
-  const [recommendation, setRecommendation] = useState("");
+const CourseRecommender = () => {
+  const [interest, setInterest] = useState("");
+  const [pastEnrollment, setPastEnrollment] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const interestOptions = ["Web Development", "DSA", "AI/ML", "UI/UX", "Cybersecurity", "Blockchain"];
-  const courseOptions = ["HTML", "CSS", "JavaScript", "C++", "Python", "React"];
+  const interests = [
+    "Artificial Intelligence",
+    "Web Development",
+    "Data Science",
+    "Cybersecurity",
+    "Cloud Computing",
+    "Blockchain",
+  ];
 
-  const handleRecommend = async () => {
+  const pastCourses = [
+    "Python for Beginners",
+    "HTML & CSS",
+    "Intro to Java",
+    "Linux Basics",
+    "Computer Networks",
+    "Database Management",
+  ];
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSuggestions([]);
+    setError("");
     setLoading(true);
-    setRecommendation("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/recommend-courses", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          interests: interests ? [interests] : [],
-          pastCourses: pastCourses ? [pastCourses] : [],
-        }),
+      const response = await axios.post("https://suggestion-rho.vercel.app/webhook", {
+        queryResult: {
+          parameters: {
+            interest,
+            pastEnrollment,
+          },
+        },
       });
 
-      const data = await response.json();
-      if (data.recommendation) {
-        const formatted = data.recommendation
-          .split(/\n|\u2022|\d+\./)
-          .map((line) => line.trim())
-          .filter((line) => line.length > 0);
-        setRecommendation(formatted);
-      } else {
-        setRecommendation(["No recommendations found."]);
-      }
+      const message = response.data?.fulfillmentText || "No suggestions found.";
+      const list = message
+        .split(/[\n•\-]+/)
+        .map((item) => item.trim())
+        .filter((item) => item !== "");
+
+      setSuggestions(list);
     } catch (err) {
-      console.error(err);
-      setRecommendation(["Something went wrong."]);
-    } finally {
-      setLoading(false);
+      console.error("Frontend Error:", err);
+      setError("⚠️ Failed to fetch suggestions. Please try again.");
     }
+
+    setLoading(false);
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", background: "#f2f2f2" }}>
-      <div style={{ background: "white", padding: "2rem", borderRadius: "12px", width: "95%", maxWidth: "1000px", boxShadow: "0 4px 10px rgba(0,0,0,0.1)" }}>
-        <h2 style={{ marginBottom: "1.5rem", textAlign: "center" }}>🎯 Course Recommender</h2>
+    <div className="min-h-[90vh] pt-1 pb-12 px-4 flex justify-center">
+      <div className="w-full max-w-8xl bg-white  shadow-xl p-8">
+        <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">
+          🎓 Personalized Course Recommender
+        </h2>
 
-        <div style={{ display: "flex", gap: "1rem", marginBottom: "1.5rem", flexWrap: "wrap", justifyContent: "center" }}>
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label><strong>Choose Interest:</strong></label><br />
-            <select value={interests} onChange={(e) => setInterests(e.target.value)} style={{ minWidth: "220px", padding: "0.5rem" }}>
-              <option value="">-- Select Interest --</option>
-              {interestOptions.map((interest) => (
-                <option key={interest} value={interest}>{interest}</option>
+            <label className="block text-gray-700 font-medium mb-1">Select Your Interest</label>
+            <select
+              value={interest}
+              onChange={(e) => setInterest(e.target.value)}
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">-- Choose an Interest --</option>
+              {interests.map((item, index) => (
+                <option key={index} value={item}>{item}</option>
               ))}
             </select>
           </div>
 
           <div>
-            <label><strong>Past Course Taken:</strong></label><br />
-            <select value={pastCourses} onChange={(e) => setPastCourses(e.target.value)} style={{ minWidth: "220px", padding: "0.5rem" }}>
-              <option value="">-- Select Course --</option>
-              {courseOptions.map((course) => (
-                <option key={course} value={course}>{course}</option>
+            <label className="block text-gray-700 font-medium mb-1">Select Past Enrollments</label>
+            <select
+              value={pastEnrollment}
+              onChange={(e) => setPastEnrollment(e.target.value)}
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">-- Choose a Past Course --</option>
+              {pastCourses.map((item, index) => (
+                <option key={index} value={item}>{item}</option>
               ))}
             </select>
           </div>
 
-          <div style={{ display: "flex", alignItems: "flex-end" }}>
-            <button onClick={handleRecommend} disabled={loading} style={{ padding: "10px 20px", backgroundColor: "#007bff", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>
-              {loading ? "Generating..." : "Get Recommendations"}
-            </button>
-          </div>
-        </div>
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-6 py-3 rounded-xl w-full hover:bg-blue-700 transition disabled:opacity-60"
+            disabled={loading}
+          >
+            {loading ? "Fetching Suggestions..." : "Get Suggestions"}
+          </button>
+        </form>
 
-        {recommendation.length > 0 && (
-          <div style={{ marginTop: "2rem", backgroundColor: "#f9f9f9", padding: "1rem", borderRadius: "8px", maxHeight: "400px", overflowY: "auto" }}>
-            <h3>📚 Recommendations:</h3>
-            <ul style={{ paddingLeft: "1.2rem", margin: 0, overflowWrap: "break-word" }}>
-              {recommendation.map((item, index) => (
-                <li key={index} style={{ marginBottom: "0.5rem" }}>{item}</li>
+        {/* Output */}
+        {suggestions.length > 0 && (
+          <div className="mt-8 bg-blue-50 border border-blue-200 p-5 rounded-xl text-gray-800">
+            <h4 className="text-xl font-semibold text-blue-800 mb-3">🔍 Suggested Courses:</h4>
+            <ul className="list-disc list-inside space-y-2 text-base">
+              {suggestions.map((item, index) => (
+                <li key={index}>{item}</li>
               ))}
             </ul>
           </div>
         )}
+
+        {error && (
+          <p className="mt-4 text-red-600 text-sm font-medium text-center">{error}</p>
+        )}
       </div>
     </div>
   );
-}
+};
 
 export default CourseRecommender;
