@@ -57,28 +57,38 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-semibold mb-6 text-center">
-          {isSignup ? "Sign Up" : "Login"}
-        </h2>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-blue-100 via-white to-blue-200 px-4">
+      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md border border-blue-100">
+        <div className="text-center mb-6">
+          <div className="text-4xl mb-2">🔐</div>
+          <h2 className="text-2xl font-bold text-blue-800">
+            {isSignup ? "Create Account" : "Welcome Back"}
+          </h2>
+          <p className="text-sm text-gray-500">
+            {isSignup ? "Join us and start learning!" : "Log in to continue"}
+          </p>
+        </div>
+
+        {error && <div className="text-red-600 text-sm mb-4 text-center">{error}</div>}
+
         <input
           type="email"
           placeholder="Email"
-          className="w-full p-2 border rounded mb-4"
+          className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <input
           type="password"
           placeholder="Password"
-          className="w-full p-2 border rounded mb-4"
+          className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
         <select
-          className="w-full p-2 border rounded mb-4"
+          className="w-full px-4 py-2 mb-4 border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
           value={role}
           onChange={(e) => setRole(e.target.value)}
         >
@@ -86,21 +96,23 @@ const LoginPage = () => {
           <option value="faculty">Faculty</option>
           <option value="student">Student</option>
         </select>
+
         <button
           onClick={handleSubmit}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white p-2 rounded"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-300"
         >
           {isSignup ? "Sign Up" : "Login"}
         </button>
-        <p className="mt-4 text-center">
+
+        <div className="text-center mt-6 text-sm">
           {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
           <button
-            className="text-blue-600 underline"
+            className="text-blue-600 hover:underline font-medium"
             onClick={() => setIsSignup(!isSignup)}
           >
             {isSignup ? "Login here" : "Sign up"}
           </button>
-        </p>
+        </div>
       </div>
     </div>
   );

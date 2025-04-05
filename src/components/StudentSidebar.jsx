@@ -24,6 +24,13 @@ const StudentSidebar = () => (
           <span className="text-justify">Course Enrolment</span>
         </Link>
       </li>
+
+      <li className="mb-8">
+        <Link to="/student/courseRecommender" className="flex items-center space-x-3 text-white text-2xl hover:text-blue-900">
+          <BookOpen className="w-6 h-6" />
+          <span className="text-justify">Ai Course</span>
+        </Link>
+      </li>
       <li className="mb-8">
         <Link to="/student/lectures" className="flex items-center space-x-3 text-white text-2xl hover:text-blue-900">
           <Video className="w-6 h-6" />
