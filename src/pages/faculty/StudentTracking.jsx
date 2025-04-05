@@ -62,7 +62,7 @@ const StudentTracking = () => {
 
   return (
     <div className="max-w-xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4 text-center">📊 Quiz Leaderboard</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">📊 Student Tracking</h1>
 
       <div className="mb-4">
         <label className="block text-gray-700 font-medium mb-2">

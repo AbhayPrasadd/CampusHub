@@ -52,7 +52,7 @@ const  AssignmentManagement = () => {
   }, []);
 
   return (
-    <div className="max-w-5xl mx-auto bg-white shadow-md rounded-xl p-8 mt-10">
+    <div className="max-w-8xl mx-auto bg-white shadow-md  p-8 mt-10">
       <h2 className="text-2xl font-bold text-blue-700 mb-6">Assignment Manager</h2>
 
       {/* Upload Form */}

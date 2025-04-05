@@ -9,7 +9,7 @@ const StudentNavbar = ({ onNotificationsClick }) => {
 
   const handleLogout = () => {
     // Clear tokens or session if needed
-    navigate("/login");
+    navigate("/");
   };
 
   return (
