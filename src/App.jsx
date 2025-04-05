@@ -31,7 +31,9 @@ import CreateCourse from "./pages/faculty/CreateCourse";
 import UserManagement from "./pages/admin/UserManagement";
 import ReportGeneration from "./pages/admin/ReportGeneration";
 import Announcements from "./pages/admin/Announcements";
-import CourseManagement from "./pages/faculty/CourseCreation";
+import CourseManagement from "./pages/admin/CourseManagement";
+import SystemSettings from "./pages/admin/SystemSettings"; 
+import Logs from "./pages/admin/Logs"; 
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -105,7 +107,10 @@ const App = () => {
     <Route path="/admin/user-management" element={<Layout role="admin"><UserManagement /></Layout>} />
     <Route path="/admin/report-generation" element={<Layout role="admin"><ReportGeneration /></Layout>} />
     <Route path="/admin/announcements" element={<Layout role="admin"><Announcements /></Layout>} />
-    <Route path="/admin/course-management" element={<Layout role="admin"><CourseManagement /></Layout>} />
+    <Route path="/admin/coursemanagement" element={<Layout role="admin"><CourseManagement /></Layout>} />
+    <Route path="/admin/systemsettings" element={<Layout role="admin"><SystemSettings /></Layout>} />
+    <Route path="/admin/logs" element={<Layout role="admin"><Logs/></Layout>} />
+
   </>
 )}
   
@@ -121,7 +126,6 @@ const App = () => {
     
   </>
 )}
-
 
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

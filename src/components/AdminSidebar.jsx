@@ -36,7 +36,7 @@ const AdminSidebar = () => (
         </Link>
       </li>
       <li className="mb-6">
-        <Link to="/admin/course-management" className="flex items-center space-x-3 text-white text-xl hover:text-blue-900">
+        <Link to="/admin/coursemanagement" className="flex items-center space-x-3 text-white text-xl hover:text-blue-900">
           <BookOpen className="w-6 h-6" />
           <span className="text-justify">Course Management</span>
         </Link>

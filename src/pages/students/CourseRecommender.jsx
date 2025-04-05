@@ -43,7 +43,7 @@ function CourseRecommender() {
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", background: "#f2f2f2" }}>
-      <div style={{ background: "white", padding: "2rem", width: "95%", maxWidth: "1000px", boxShadow: "0 4px 10px rgba(0,0,0,0.1)" }}>
+      <div style={{ background: "white", padding: "2rem", borderRadius: "12px", width: "95%", maxWidth: "1000px", boxShadow: "0 4px 10px rgba(0,0,0,0.1)" }}>
         <h2 style={{ marginBottom: "1.5rem", textAlign: "center" }}>🎯 Course Recommender</h2>
 
         <div style={{ display: "flex", gap: "1rem", marginBottom: "1.5rem", flexWrap: "wrap", justifyContent: "center" }}>

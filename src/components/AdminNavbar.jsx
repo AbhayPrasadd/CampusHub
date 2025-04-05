@@ -14,7 +14,7 @@ const FacultyNavbar = ({ onNotificationsClick }) => {
 
   return (
     <div className="bg-gray-800 text-white px-6 py-3 flex justify-between items-center shadow">
-      <div className="text-xl font-semibold">Faculty Dashboard</div>
+      <div className="text-xl font-semibold"></div>
 
       <div className="flex items-center space-x-4 gap-5 relative">
         {/* Notification Bell */}
