@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { db } from "../../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { CheckCircle, AlertCircle } from "lucide-react";
 
 const Announcement = () => {
   const [title, setTitle] = useState("");
@@ -12,7 +13,7 @@ const Announcement = () => {
     e.preventDefault();
 
     if (!title.trim() || !message.trim()) {
-      setStatus("Please fill in all fields.");
+      setStatus({ type: "error", message: "Please fill in all fields." });
       return;
     }
 
@@ -25,45 +26,73 @@ const Announcement = () => {
 
       setTitle("");
       setMessage("");
-      setStatus("✅ Announcement posted successfully!");
+      setStatus({ type: "success", message: "Announcement posted successfully!" });
     } catch (error) {
       console.error("Error adding document: ", error);
-      setStatus("❌ Failed to post announcement.");
+      setStatus({ type: "error", message: "Failed to post announcement." });
     }
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-6">
-      <h2 className="text-2xl font-semibold mb-4 text-gray-800">📢 Create Announcement</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-gray-700 font-medium mb-1">Title</label>
-          <input
-            type="text"
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Enter title"
-          />
-        </div>
-        <div>
-          <label className="block text-gray-700 font-medium mb-1">Message</label>
-          <textarea
-            rows={4}
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Enter message"
-          ></textarea>
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
-        >
-          Post Announcement
-        </button>
-        {status && <p className="text-sm mt-2 text-gray-700">{status}</p>}
-      </form>
+    <div className="max-w-8xl mx-auto mt-12 px-6 sm:px-8">
+      <div className="bg-white shadow-2xl p-8">
+        <h2 className="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+          📢 Create New Announcement
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Title Field */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">Announcement Title</label>
+            <input
+              type="text"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="e.g. Maintenance Downtime, Exam Schedule, New Feature Update"
+            />
+          </div>
+
+          {/* Message Field */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">Message Content</label>
+            <textarea
+              rows={5}
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Write the details of the announcement here..."
+            ></textarea>
+          </div>
+
+          {/* Button */}
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition duration-300 shadow-md"
+            >
+              📤 Post Announcement
+            </button>
+          </div>
+
+          {/* Status Message */}
+          {status && (
+            <div
+              className={`mt-4 flex items-center gap-2 p-3 rounded-xl text-sm font-medium ${
+                status.type === "success"
+                  ? "text-green-700 bg-green-100"
+                  : "text-red-700 bg-red-100"
+              }`}
+            >
+              {status.type === "success" ? (
+                <CheckCircle size={18} />
+              ) : (
+                <AlertCircle size={18} />
+              )}
+              {status.message}
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 };
