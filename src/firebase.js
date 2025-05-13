@@ -1,25 +1,20 @@
-// Import core functions from Firebase SDK
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
 
-// Your Firebase configuration
+// Firebase config from .env file
 const firebaseConfig = {
-  apiKey: "AIzaSyDIetu9ajHu1SzW7dGBP-3UlFaX6rL2z6I",
-  authDomain: "elearning-4fd75.firebaseapp.com",
-  projectId: "elearning-4fd75",
-  storageBucket: "elearning-4fd75.appspot.com",
-  messagingSenderId: "569212429219",
-  appId: "1:569212429219:web:1883e4a05991e5a3bd3016"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase app
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Initialize services
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Export services
-export { auth, db,onAuthStateChanged };
+export { auth, db, onAuthStateChanged };

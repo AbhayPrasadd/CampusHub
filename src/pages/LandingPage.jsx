@@ -9,7 +9,7 @@ import {
   FolderOpen,
 } from "lucide-react";
 
-const HomePage = () => {
+const LandingPage = () => {
   const navigate = useNavigate();
 
   const features = [
@@ -121,4 +121,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default LandingPage;

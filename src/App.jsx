@@ -3,11 +3,11 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
-import HomePage from "./pages/HomePage";
+import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
-import AdminDashboard from "./pages/AdminDashboard";
-import FacultyDashboard from "./pages/FacultyDashboard";
-import StudentDashboard from "./pages/StudentDashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import FacultyDashboard from "./pages/faculty/FacultyDashboard";
+import StudentDashboard from "./pages/students/StudentDashboard";
 import Layout from "./components/Layout";
 import { auth, db } from "./firebase";
 
@@ -79,7 +79,7 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
 
       <Route
